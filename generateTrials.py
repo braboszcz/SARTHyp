@@ -4,7 +4,7 @@ Occurrences of targets and thought probes are pseudorandomized and uniformely di
 
 '''
 
-import random
+import random 
 import csv
 import os
 import numpy
@@ -23,19 +23,56 @@ def genSARTList(numStimPerBlock, numBlock):
 	#------------------------------------------------------------------------
         # define numbers of each type of trials
         #------------------------------------------------------------------------
-        nGo = nStim*90/100
-        nNoGo = nStim*10/100
-	nProbe = nStim*10/100
-
-	#------------------------------------------------------------------------
-        # create trial list for 1 block
-        #------------------------------------------------------------------------
+        nGo = numStimPerBlock*90/100
+        nNoGo = numStimPerBlock*5/100
+	nProbe = numStimPerBlock*5/100
 	
-	target = numpy.randint[5,15, nProbe + nNoGo]
-			
-	for i in numBlock:
-		for j in numStimPerBlock:
-			draw_target = numpy.	
+
+	
+	
+	#------------------------------------------------------------------------
+        # create trial list for each  block
+        #------------------------------------------------------------------------
+					
+	def def_trials():
+		trials = [GO]*nGo
+		# get target indices
+		ind_target = range(5,16)*((nNoGo+nProbe)/len(range(5,15)))
+		random.shuffle(ind_target)
+		# create list of targets
+		target_list = [PROBE]*nProbe
+		target_list += [NOGO]*nNoGo
+		random.shuffle(target_list)
+
+		next_target = 0
+		for i in range(len(target_list)):
+			next_target += ind_target[i]
+			target = target_list.pop()
+			trials.insert(next_target,target )
+		return trials
+
+	pause = []
+	for j in range(numBlock):
+		trials = []
+		trials = def_trials()
+		go_list = ['1','2','4','5','6','7','8','9']*nGo
+		random.shuffle(go_list)
+		trial = []
+		for n in range(len(trials)):
+			if trials[n] == 2:	
+				trial = ['3','nogo', j+1]
+			elif trials[n] == 3:
+				trial = ['probe.png','probe', j+1]
+			else: 
+				stim = go_list.pop()
+				trial = [stim, 'go', j+1]
+
+			writeTrials.writerow(trial)
+			print trial
+		pause = ['break', 'break', j+1]
+		writeTrials.writerow(pause)
+
+	
 
 
-		
+genSARTList(300,5)		
