@@ -45,3 +45,35 @@ globalClock = core.Clock()  # to track the time since experiment started
 respTime = core.Clock()
 trialClock = core.Clock()
 
+
+#---------------------------------------
+# Setup Window
+#---------------------------------------
+
+win = visual.Window(1280,1024), color=[0,0,0], monitor = 'testMonitor', 
+	units = 'height', fullscr = False, colorSpace = 'rgb')  
+
+
+#---------------------------------------
+# Hypnosis  Induction Routine
+#---------------------------------------
+def induction():
+	fixation.draw()
+        win.flip()
+	even.waitKeys(KeyList = 'space')
+
+
+#---------------------------------------
+# Fixation cross
+#---------------------------------------
+
+
+fixation=visual.TextStim(win=win, ori=0, name='fixation_cross',
+	text='+',
+        font='Arial',
+        pos=[0, 0], height=0.06,
+        color='black')
+        fixation.setLineWidth = 0.4
+
+
+
