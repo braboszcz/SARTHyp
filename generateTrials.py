@@ -1,7 +1,7 @@
 '''
-Generate trias list for SART task: 1 to 9 numbers with number 3 20% rare target and thought probe
-Occurrences of targets and thought probes are pseudorandomized and uniformely distributed within sessions
-
+Generate trias list for SART task: 1 to 9 numbers with number 3 10% rare target and thought probe
+Occurrences of targets and thought probes events are pseudorandomized and uniformely distributed within sessions so 
+that there is between 5 to 15 trials between each event and each distance has the same number of occurences
 '''
 
 import random 
@@ -75,4 +75,4 @@ def genSARTList(numStimPerBlock, numBlock):
 	
 
 
-genSARTList(300,5)		
+genSARTList(300,4)		
