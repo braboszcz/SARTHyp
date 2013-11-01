@@ -148,15 +148,21 @@ for thisTrial in trials:
 	stimOnset = trialClock.getTime()
 	
 	if thisTrial['Condition'] == 'break':
-		fin_block = visual.TextStim(win = win, ori = 0, text = u"Bloc numéro %s terminé.\n Appuyer sur 'entrée' pour continuer " %thisTrial['Block'],
+		fin_block = visual.TextStim(win = win, ori = 0, text = u"Bloc numéro %s terminé.\n Vous pouvez faire une pause \n Appuyer sur 'entrée' pour continuer " %thisTrial['Block'],
 	alignHoriz = 'center', alignVert='center', height=0.04, color='white')
 		fin_block.draw()
+	
+	elif thisTrial['Condition'] == 'breakHypno':
+		fin_block = visual.TextStim(win = win, ori = 0, text = u"Bloc numéro %s terminé. L'expérience va continuer" %thisTrial['Block'],
+alignHoriz = 'center', alignVert='center', height=0.04, color='white')
+		fin_block.draw()
+
 		
 		win.flip()
 		thisRespKey = event.waitKeys(keyList = 'return')
 		fixation.draw()
 		win.flip()
-		core.wait(1)
+		core.wait(2)
 	
 	elif thisTrial['Condition'] == 'probe':
 		probe_signe.draw(win)
@@ -167,7 +173,7 @@ for thisTrial in trials:
 		thisRespKey = event.waitKeys(keyList = ['1', '2', '3', '4'])
 		fixation.draw()
 		win.flip()
-		core.wait(1)	
+		core.wait(2)	
 	
 	else:
 		stim = visual.TextStim(win, text = thisTrial['Stim'], height = 0.1)
