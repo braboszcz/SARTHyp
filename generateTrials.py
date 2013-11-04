@@ -55,18 +55,21 @@ def genSARTList(numStimPerBlock, numBlock):
 	for j in range(numBlock):
 		trials = []
 		trials = def_trials()
-		go_list = ['1','2','4','5','6','7','8','9']*nGo
+		go_list = ['1','2','4','5','6','7','8','9']#*nGo
 		random.shuffle(go_list)
 		trial = []
+		last_stim = 0
 		for n in range(len(trials)):
 			if trials[n] == 2:	
 				trial = ['3','nogo', j+1]
 			elif trials[n] == 3:
 				trial = ['probe.png','probe', j+1]
 			else: 
-				stim = go_list.pop()
+				stim = random.choice(go_list)
+				while stim == last_stim:
+					stim = random.choice(go_list)
 				trial = [stim, 'go', j+1]
-
+				last_stim = stim
 			writeTrials.writerow(trial)
 			print trial
 		if j+1 ==  numBlock:
@@ -79,4 +82,4 @@ def genSARTList(numStimPerBlock, numBlock):
 	
 
 
-genSARTList(10,2)		
+genSARTList(300,2)		
