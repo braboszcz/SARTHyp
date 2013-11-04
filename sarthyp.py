@@ -14,7 +14,7 @@ import os, sys
 # Set Variables
 #---------------------------------------
 
-TRIALS_FILE = 'trialList.csv'
+TRIALS_FILE = 'test.csv' #trialList_Hypno.csv ; trialList_Normal.csv
 ISI = 1.5
 
  
@@ -71,7 +71,7 @@ logging.console.setLevel(logging.DEBUG)  # this outputs to the screen, not a fil
 #---------------------------------------
 
 win = visual.Window((1280,1024), color=[0,0,0], monitor = 'testMonitor', 
-units = 'height', fullscr = False, colorSpace = 'rgb')  
+units = 'height', fullscr = True, colorSpace = 'rgb')  
 
 
 #---------------------------------------
@@ -151,18 +151,24 @@ for thisTrial in trials:
 		fin_block = visual.TextStim(win = win, ori = 0, text = u"Bloc numéro %s terminé.\n Vous pouvez faire une pause \n Appuyer sur 'entrée' pour continuer " %thisTrial['Block'],
 	alignHoriz = 'center', alignVert='center', height=0.04, color='white')
 		fin_block.draw()
+		win.flip()
+		thisRespKey = event.waitKeys(keyList = 'return')
+		fixation.draw()
+		win.flip()
+		core.wait(2)	
+	
 	
 	elif thisTrial['Condition'] == 'breakHypno':
-		fin_block = visual.TextStim(win = win, ori = 0, text = u"Bloc numéro %s terminé. L'expérience va continuer" %thisTrial['Block'],
+		hypno = visual.TextStim(win = win, ori = 0, text = u"Bloc numéro %s terminé. L'expérience va continuer" %thisTrial['Block'],
 alignHoriz = 'center', alignVert='center', height=0.04, color='white')
-		fin_block.draw()
-
-		
+		hypno.draw()
 		win.flip()
 		thisRespKey = event.waitKeys(keyList = 'return')
 		fixation.draw()
 		win.flip()
 		core.wait(2)
+		
+	
 	
 	elif thisTrial['Condition'] == 'probe':
 		probe_signe.draw(win)
@@ -174,7 +180,12 @@ alignHoriz = 'center', alignVert='center', height=0.04, color='white')
 		fixation.draw()
 		win.flip()
 		core.wait(2)	
-	
+
+	elif thisTrial['Condition'] == 'end':
+		the_end.draw()
+		win.flip()
+		core.wait(5)
+
 	else:
 		stim = visual.TextStim(win, text = thisTrial['Stim'], height = 0.1)
 		stim.draw()
@@ -202,9 +213,6 @@ alignHoriz = 'center', alignVert='center', height=0.04, color='white')
 		win.close()
 		core.quit()
 
-the_end.draw()
-win.flip()
-core.wait(5)
 totaltime = expeClock.getTime()/60
 print totaltime
 
