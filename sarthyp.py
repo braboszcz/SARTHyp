@@ -59,10 +59,10 @@ expeClock = core.Clock()  # to track the time since experiment started
 
 if not os.path.isdir('Logdata'):
 	os.makedirs('Logdata')  # if this fails (e.g. permissions) we will get error
-filename = 'Logdata' + os.path.sep + '%s_%s' %(expInfo['participant'], expInfo['date'])
+filename = 'Logdata' + os.path.sep + '%s_%s' %(expInfo['participant'], expInfo['session'])
 logging.setDefaultClock(trialClock)
 logFileExp = logging.LogFile(filename +'.log', level=logging.EXP)
-logging.console.setLevel(logging.DEBUG)  # this outputs to the screen, not a file
+logging.console.setLevel(logging.EXP)  # this outputs to the screen, not a file
 
 
 
