@@ -16,7 +16,7 @@ import os, sys
 
 TRIALS_FILE = 'training.csv' #trialList_Hypno.csv ; trialList_Normal.csv
 ISI = 1.5
-
+validResponses = ['space', 'none']
  
 
 #---------------------------------------
@@ -71,7 +71,7 @@ logging.console.setLevel(logging.DEBUG)  # this outputs to the screen, not a fil
 #---------------------------------------
 
 win = visual.Window((1280,1024), color=[0,0,0], monitor = 'testMonitor', 
-units = 'height', fullscr = True, colorSpace = 'rgb')  
+units = 'height', fullscr = False, colorSpace = 'rgb')  
 
 
 #---------------------------------------
@@ -117,6 +117,35 @@ pos = [0,0], height = 0.03, color = 'white')
 
 probe_signe = visual.TextStim(win=win, ori =0, name ='probe_signe', text = '?', pos = [0,0], height = 0.1, color = 'white')
 
+#-------------------------------
+# Function to get responses
+#-------------------------------
+def getKeyboardResponse(validResponses,duration= 0):
+	"""Returns keypress and RT. Specify a duration (in secs) if you want response collection to last 
+        that long. Unlike event.waitkeys(maxWait=..), this function will not exit until duration. 
+        Use waitKeys with a maxWait parameter if you want to have a response deadline, but exit as soon 
+        as a response is received."""
+	event.clearEvents() #important - prevents buffer overruns
+	responded = False
+	timeElapsed = False
+	rt = '*'
+	responseTimer = core.Clock()
+ 
+	if duration==0:
+		responded = event.waitKeys(keyList=validResponses)
+		rt = responseTimer.getTime()
+		return [responded[0],rt] #only get the first response. no timer for waitKeys, so do it manually w/ a clock
+	else:
+		while responseTimer.getTime() < duration:
+			if not responded:
+				responded = event.getKeys(keyList=validResponses,timeStamped=responseTimer)
+		if not responded:
+			return [' ',' ']
+		else:
+			return responded[0]  #only get the first resp
+
+
+
 
 
 #--------------------------------------
@@ -143,7 +172,7 @@ core.wait(2)
 for thisTrial in trials:
 	trials.saveAsWideText(filename + '.csv', delim = ';', appendFile = False)
 	
-	thisRespKey = []
+#	thisRespKey = []
 	RespKey = []
 	ProbeKey = []
 	thisProbeKey = []
@@ -178,7 +207,7 @@ alignHoriz = 'center', alignVert='center', height=0.04, color='white')
 		core.wait(0.5)
 		probe.draw(win)
 		win.flip()
-		thisProbeKey = event.waitKeys(keyList = ['1', '2', '3', '4'])
+		thisProbeKey = getKeyboardResponse( ['1', '2', '3', '4'], duration = 0)
 		fixation.draw()
 		win.flip()
 		core.wait(2)	
@@ -192,19 +221,17 @@ alignHoriz = 'center', alignVert='center', height=0.04, color='white')
 		stim = visual.TextStim(win, text = thisTrial['Stim'], height = 0.1)
 		stim.draw()
 		win.flip() 
-		core.wait(ISI)
-		thisRespKey = event.waitKeys(maxWait= ISI, keyList = ['space'])
-
-
-
+		#thisRespKey = event.waitKeys(maxWait= ISI, keyList = ['space', 'none'])
+		#core.wait(ISI)
+		thisRespKey = getKeyboardResponse('space', duration = ISI)
 
 	if len(thisRespKey)>0 : # at least one key was pressed
-		RespKey = thisRespKey[-1] # get just the last key pressed
-		ResponseTime = trialClock.getTime()
+		RespKey = thisRespKey[0] # get keypress
+		ResponseTime = thisRespKey[1] #get response time
 	
 	if len(thisProbeKey)>0 : # at least one key was pressed
-		ProbeKey = thisProbeKey[-1] # get just the last key pressed
-		ResponseTime = trialClock.getTime()
+		ProbeKey = thisProbeKey[0] # get keypress
+		ResponseTime = thisRespKey[1] # get response time
 	
 	#--------------------------------------
 	# store trial data
