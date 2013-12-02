@@ -14,7 +14,7 @@ import os, sys
 # Set Variables
 #---------------------------------------
 
-TRIALS_FILE = 'test.csv' #trialList_Hypno.csv ; trialList_Normal.csv
+TRIALS_FILE = 'training.csv' #trialList_Hypno.csv ; trialList_Normal.csv
 ISI = 1.5
 
  
@@ -24,7 +24,7 @@ ISI = 1.5
 #---------------------------------------
 
 expName = 'SARTHyp'
-expInfo = {'participant':'', 'gender (m/f)':'', 'age':'', 'session':''}
+expInfo = {'participant':'', 'gender (m/f)':'', 'session':''}
 dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 if dlg.OK == False: core.quit()  # user pressed cancel  
 expInfo['date'] = data.getDateStr()  # add a simple timestamp  
@@ -62,7 +62,7 @@ if not os.path.isdir('Logdata'):
 filename = 'Logdata' + os.path.sep + '%s_%s' %(expInfo['participant'], expInfo['session'])
 logging.setDefaultClock(trialClock)
 logFileExp = logging.LogFile(filename +'.log', level=logging.EXP)
-logging.console.setLevel(logging.EXP)  # this outputs to the screen, not a file
+logging.console.setLevel(logging.DEBUG)  # this outputs to the screen, not a file
 
 
 
@@ -145,6 +145,8 @@ for thisTrial in trials:
 	
 	thisRespKey = []
 	RespKey = []
+	ProbeKey = []
+	thisProbeKey = []
 	stimOnset = trialClock.getTime()
 	
 	if thisTrial['Condition'] == 'break':
@@ -176,7 +178,7 @@ alignHoriz = 'center', alignVert='center', height=0.04, color='white')
 		core.wait(0.5)
 		probe.draw(win)
 		win.flip()
-		thisRespKey = event.waitKeys(keyList = ['1', '2', '3', '4'])
+		thisProbeKey = event.waitKeys(keyList = ['1', '2', '3', '4'])
 		fixation.draw()
 		win.flip()
 		core.wait(2)	
@@ -190,12 +192,18 @@ alignHoriz = 'center', alignVert='center', height=0.04, color='white')
 		stim = visual.TextStim(win, text = thisTrial['Stim'], height = 0.1)
 		stim.draw()
 		win.flip() 
-		thisRespKey = event.getKeys()
 		core.wait(ISI)
+		thisRespKey = event.waitKeys(maxWait= ISI, keyList = ['space'])
+
+
 
 
 	if len(thisRespKey)>0 : # at least one key was pressed
 		RespKey = thisRespKey[-1] # get just the last key pressed
+		ResponseTime = trialClock.getTime()
+	
+	if len(thisProbeKey)>0 : # at least one key was pressed
+		ProbeKey = thisProbeKey[-1] # get just the last key pressed
 		ResponseTime = trialClock.getTime()
 	
 	#--------------------------------------
@@ -204,11 +212,13 @@ alignHoriz = 'center', alignVert='center', height=0.04, color='white')
 	
 	trials.addData('stimOnset', stimOnset)
 	if RespKey != []:
-		trials.addData('respKey',RespKey)
+		trials.addData('respKey', RespKey)
 		trials.addData('respTime', ResponseTime)
+	if ProbeKey != []:
+		trials.addData('respKey', ProbeKey)       
+		trials.addData('respTime', ResponseTime) 		
 	thisExp.nextEntry()
-			
-
+	
 	if event.getKeys(['q', 'escape']):
 		win.close()
 		core.quit()
@@ -218,5 +228,4 @@ print totaltime
 
 win.close()
 core.quit()
-
 
