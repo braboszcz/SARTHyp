@@ -14,8 +14,8 @@ import os, sys
 # Set Variables
 #---------------------------------------
 
-TRIALS_FILE = 'training.csv' #trialList_Hypno.csv ; trialList_Normal.csv
-ISI = 1.5
+TRIALS_FILE = 'training.csv' #trialList_Hypno.csv ; trialList_Normal.csv # reads the trial list file
+ISI = 1.5 # inter stim interval
 validResponses = ['space', 'none']
  
 
