@@ -8,7 +8,7 @@ Script for Sustained Attention To Response Task combined with Thought Probes
 from psychopy import visual, event, core, data, logging, gui
 import time
 import os, sys
-
+from psychopy import parallel
 
 #---------------------------------------
 # Set Variables
@@ -18,17 +18,19 @@ TRIALS_FILE = 'training.csv' #trialList_Hypno.csv ; trialList_Normal.csv # reads
 ISI = 1.5 # inter stim interval
 validResponses = ['space', 'none']
  
+parallel.setPortAddress(0x378) #888
+pinNumber = 2
 
 #---------------------------------------
 # Store info about the experiment session
 #---------------------------------------
 
 expName = 'SARTHyp'
-expInfo = {'participant':'', 'gender (m/f)':'', 'session':''}
+expInfo = {'participant':'', 'session':''}
 dlg = gui.DlgFromDict(dictionary=expInfo, title=expName)
 if dlg.OK == False: core.quit()  # user pressed cancel  
 expInfo['date'] = data.getDateStr()  # add a simple timestamp  
-expInfo['expName'] = expName
+
 
 # Experiment handler
 thisExp = data.ExperimentHandler(name=expName, version='',
@@ -172,6 +174,7 @@ core.wait(2)
 for thisTrial in trials:
 	trials.saveAsWideText(filename + '.csv', delim = ';', appendFile = False)
 	
+	parallel.setData(0) # sets all pin low
 #	thisRespKey = []
 	RespKey = []
 	ProbeKey = []
@@ -183,6 +186,7 @@ for thisTrial in trials:
 	alignHoriz = 'center', alignVert='center', height=0.04, color='white')
 		fin_block.draw()
 		win.flip()
+		parallel.setPin(1,1)
 		thisRespKey = event.waitKeys(keyList = 'return')
 		fixation.draw()
 		win.flip()
@@ -204,12 +208,16 @@ alignHoriz = 'center', alignVert='center', height=0.04, color='white')
 	elif thisTrial['Condition'] == 'probe':
 		probe_signe.draw(win)
 		win.flip()
+		parallel.setPin(2,1)
+		parallel.setPin(2,0)
 		core.wait(0.5)
 		probe.draw(win)
 		win.flip()
+		parallel.setPin(2,1)
 		thisProbeKey = getKeyboardResponse( ['1', '2', '3', '4'], duration = 0)
 		fixation.draw()
 		win.flip()
+		parallel.setPin(3,1)
 		core.wait(2)	
 
 	elif thisTrial['Condition'] == 'end':
@@ -220,7 +228,8 @@ alignHoriz = 'center', alignVert='center', height=0.04, color='white')
 	else:
 		stim = visual.TextStim(win, text = thisTrial['Stim'], height = 0.1)
 		stim.draw()
-		win.flip() 
+		win.flip()
+		parallel.setPin(8,1)
 		#thisRespKey = event.waitKeys(maxWait= ISI, keyList = ['space', 'none'])
 		#core.wait(ISI)
 		thisRespKey = getKeyboardResponse('space', duration = ISI)
