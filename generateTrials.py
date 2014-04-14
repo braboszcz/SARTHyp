@@ -21,7 +21,7 @@ Trig_break = 0x0304
 
 def genSARTList(numStimPerBlock, numBlock):
 	writeTrials = csv.writer(open('mytrialList.csv','wb'), delimiter = ',', quotechar = '"')
-        header = ['Stim', 'Condition', 'Block', 'Trigger_Code']
+        header = ['Stim', 'Condition', 'Block', 'Trigger']
         writeTrials.writerow(header)
 
 
@@ -68,7 +68,7 @@ def genSARTList(numStimPerBlock, numBlock):
 			if trials[n] == 2:	
 				trial = ['3','nogo', j+1, Trig_nogo]
 			elif trials[n] == 3:
-				trial = ['probe.png','probe', j+1, Trig_probe]
+				trial = ['probe','probe', j+1, Trig_probe]
 			else: 
 				stim = random.choice(go_list)
 				while stim == last_stim:
