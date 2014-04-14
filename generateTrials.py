@@ -78,7 +78,7 @@ def genSARTList(numStimPerBlock, numBlock):
 			writeTrials.writerow(trial)
 			print trial
 		if j+1 ==  numBlock:
-			end = ['end', 'end', j+1]
+			end = ['end', 'end', j+1, 'end' ]
 			writeTrials.writerow(end)
 		else:
 			pause = ['break', 'break', j+1, Trig_break]

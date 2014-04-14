@@ -147,16 +147,18 @@ def getKeyboardResponse(validResponses,duration= 0):
 			return responded[0]  #only get the first resp
 
 def whatresp(respKey):
+    code = None
     if respKey is 1:
         code = 0x0141
     elif respKey is 2:
         code = 0x0142
     elif respKey is 3:
         code = 0x0143
-    elif respkey is 4:
+    elif respKey is 4:
         code = 0x0144
     elif respKey is 'space':
         code = 0x0145
+
     return(code)
 
 
@@ -184,14 +186,14 @@ core.wait(2)
 for thisTrial in trials:
     trials.saveAsWideText(filename + '.csv', delim = ';', appendFile = False)
 	
-    parallel.setData(0) # sets all pin low
+   # parallel.setData(0) # sets all pin low
 #	thisRespKey = []
     RespKey = []
     ProbeKey = []
     thisProbeKey = []
     stimOnset = trialClock.getTime()
 
-    if thisTrial['Condition'] == 'break':
+    if thisTrial['condition'] == 'break':
         fin_block = visual.TextStim(win = win, ori = 0, text = u"Bloc numéro %s terminé.\n Vous pouvez faire une pause \n Appuyer sur 'entrée' pour continuer " %thisTrial['Block'], alignHoriz = 'center', alignVert='center', height=0.04, color='white')
         fin_block.draw()
         win.flip()
@@ -202,13 +204,12 @@ for thisTrial in trials:
         #parallel.setData(trigger_fixation)
         core.wait(2)	
 	
-    elif thisTrial['Condition'] == 'breakHypno':
+    elif thisTrial['condition'] == 'breakHypno':
         hypno = visual.TextStim(win = win, ori = 0, text = u"Bloc numéro %s terminé. L'expérience va continuer" %thisTrial['Block'],
 alignHoriz = 'center', alignVert='center', height=0.04, color='white')
         hypno.draw()
         win.flip()
         #parallel.setData(thisTrial['Trigger'])
-        thisRespKey = event.waitKeys(keyList = 'return')
         fixation.draw()
         win.flip()
         #parallel.setData(trigger_fixation)
@@ -216,7 +217,7 @@ alignHoriz = 'center', alignVert='center', height=0.04, color='white')
 		
 	
 	
-    elif thisTrial['Condition'] == 'probe':
+    elif thisTrial['condition'] == 'probe':
         probe_signe.draw(win)
         win.flip()
         #parallel.setData(thisTrial['Trigger'])
@@ -227,20 +228,22 @@ alignHoriz = 'center', alignVert='center', height=0.04, color='white')
         #parallel.setData(thisTrial['Trigger'])
         thisProbeKey = getKeyboardResponse( ['1', '2', '3', '4'], duration = 0)
         Trig_probe = whatresp(thisProbeKey)
-        #parallel.setData(Trig_probe)
+        if Trig_probe:
+            #parallel.setData(Trig_probe)
+            pass
 
         fixation.draw()
         win.flip()
         #parallel.setData(trigger_fixation)
         core.wait(2)	
 
-    elif thisTrial['Condition'] == 'end':
+    elif thisTrial['condition'] == 'end':
         the_end.draw()
         win.flip()
         core.wait(5)
 
     else:
-        stim = visual.TextStim(win, text = thisTrial['Stim'], height = 0.1)
+        stim = visual.TextStim(win, text = thisTrial['stim'], height = 0.1)
         stim.draw()
         win.flip()
        # parallel.setData(thisTrial['Trigger'])
@@ -253,7 +256,9 @@ alignHoriz = 'center', alignVert='center', height=0.04, color='white')
 		RespKey = thisRespKey[0] # get keypress
 		ResponseTime = thisRespKey[1] #get response time
         Trig_resp = whatresp(RespKey)
-        parallel.setData(Trig_resp)
+        if Trig_resp:
+            #parallel.setData(Trig_resp)
+            pass
 	
 	#--------------------------------------
 	# store trial data
