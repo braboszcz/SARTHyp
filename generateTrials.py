@@ -14,14 +14,14 @@ GO = 1
 NOGO = 2
 PROBE = 3
 
-Trig_go = 0x0301
-Trig_nogo = 0x0302
-Trig_probe = 0x0303
-Trig_break = 0x0304
+Trig_go = 771
+Trig_nogo = 772
+Trig_probe = 773
+Trig_break = 774
 
 def genSARTList(numStimPerBlock, numBlock):
 	writeTrials = csv.writer(open('mytrialList.csv','wb'), delimiter = ',', quotechar = '"')
-        header = ['Stim', 'Condition', 'Block', 'Trigger']
+        header = ['stim', 'condition', 'block', 'response', 'response time', 'stim onset', 'trigger']
         writeTrials.writerow(header)
 
 
@@ -66,22 +66,22 @@ def genSARTList(numStimPerBlock, numBlock):
 		last_stim = 0
 		for n in range(len(trials)):
 			if trials[n] == 2:	
-				trial = ['3','nogo', j+1, Trig_nogo]
+				trial = ['3','nogo', j+1,'','','', Trig_nogo]
 			elif trials[n] == 3:
-				trial = ['probe','probe', j+1, Trig_probe]
+				trial = ['probe','probe', j+1,'','','', Trig_probe]
 			else: 
 				stim = random.choice(go_list)
 				while stim == last_stim:
 					stim = random.choice(go_list)
-				trial = [stim, 'go', j+1, Trig_go]
+				trial = [stim, 'go', j+1,'','','', Trig_go]
 				last_stim = stim
 			writeTrials.writerow(trial)
 			print trial
 		if j+1 ==  numBlock:
-			end = ['end', 'end', j+1, 'end' ]
+			end = ['end', 'end', j+1,'','','', Trig_break ]
 			writeTrials.writerow(end)
 		else:
-			pause = ['break', 'break', j+1, Trig_break]
+			pause = ['break', 'break', j+1,'','','', Trig_break]
 			writeTrials.writerow(pause)
 
 	

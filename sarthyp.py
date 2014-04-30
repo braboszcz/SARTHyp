@@ -11,6 +11,8 @@ import os, sys
 from psychopy import parallel
 #import myparport as mp
 
+from ppc import csvWriter
+
 #---------------------------------------
 # Set Variables
 #---------------------------------------
@@ -18,7 +20,7 @@ from psychopy import parallel
 TRIALS_FILE = 'mytrialList.csv' #trialList_Hypno.csv ; trialList_Normal.csv # reads the trial list file
 ISI = 1.5 # inter stim interval
 validResponses = ['space', 'none']
- 
+
 parallel.setPortAddress(0x378) #888
 
 #---------------------------------------
@@ -33,10 +35,10 @@ expInfo['date'] = data.getDateStr()  # add a simple timestamp
 
 
 # Experiment handlerr
-thisExp = data.ExperimentHandler(name=expName, version='',
-    extraInfo=expInfo, runtimeInfo=None,
-    originPath=None,
-    savePickle=False, saveWideText=False) #prevent the experiment handler to write expe data upon termination (and overwriting our files)
+#thisExp = data.ExperimentHandler(name=expName, version='',
+#    extraInfo=expInfo, runtimeInfo=None,
+#    originPath=None,
+#    savePickle=False, saveWideText=False) #prevent the experiment handler to write expe data upon termination (and overwriting our files)
 
 #----------------------------------
 # Load trial files 
@@ -44,10 +46,10 @@ thisExp = data.ExperimentHandler(name=expName, version='',
 
 # read from csv file
 trialList = data.importConditions(TRIALS_FILE, returnFieldNames=False)
-trials = data.TrialHandler(trialList, nReps=1, method='sequential') #, extraInfo=expInfo
-trials.data.addDataType('respKey')
-trials.data.addDataType('respTime')
-trials.data.addDataType('stimOnset')
+#trials = data.TrialHandler(trialList, nReps=1, method='sequential') #, extraInfo=expInfo
+#trials.data.addDataType('respKey')
+#trials.data.addDataType('respTime')
+#trials.data.addDataType('stimOnset')
 
 #---------------------------------------
 # Create timers
@@ -66,7 +68,7 @@ logging.setDefaultClock(trialClock)
 logFileExp = logging.LogFile(filename +'.log', level=logging.EXP)
 logging.console.setLevel(logging.DEBUG)  # this outputs to the screen, not a file
 
-
+writer = ppc.csvWriter(expInfo['participant'] + '_' + expInfo['session'], 'data')
 
 #---------------------------------------
 # Setup Window
@@ -148,20 +150,21 @@ def getKeyboardResponse(validResponses,duration= 0):
 
 def whatresp(respKey):
     code = None
-    if respKey is 1:
-        code = 0x0141
-    elif respKey is 2:
-        code = 0x0142
-    elif respKey is 3:
-        code = 0x0143
-    elif respKey is 4:
-        code = 0x0144
+    if respKey is '1':
+        code = 111
+    elif respKey is '2':
+        code = 112
+    elif respKey is '3':
+        code = 113
+    elif respKey is '4':
+        code = 114
     elif respKey is 'space':
-        code = 0x0145
+        code = 115
 
     return(code)
 
 
+trigger_fixation = 0x0160
 #--------------------------------------
 # Start Experiment
 #--------------------------------------
@@ -183,8 +186,8 @@ core.wait(2)
 # Run TAsk
 #--------------------------------------
 
-for thisTrial in trials:
-    trials.saveAsWideText(filename + '.csv', delim = ';', appendFile = False)
+for thisTrial in trialList: #trials
+    # trials.saveAsWideText(filename + '.csv', delim = ';', appendFile = False)
 	
     parallel.setData(0) # sets all pin low
 #	thisRespKey = []
@@ -197,11 +200,16 @@ for thisTrial in trials:
         fin_block = visual.TextStim(win = win, ori = 0, text = u"Bloc numéro %s terminé.\n Vous pouvez faire une pause \n Appuyer sur 'entrée' pour continuer " %thisTrial['Block'], alignHoriz = 'center', alignVert='center', height=0.04, color='white')
         fin_block.draw()
         win.flip()
-        parallel.setData(thisTrial['Trigger'])
+        parallel.setData(thisTrial['trigger'])
+        core.wait(0.005)
+        parallel.setData(0)
+
         thisRespKey = event.waitKeys(keyList = 'return')
         fixation.draw()
         win.flip()
         parallel.setData(trigger_fixation)
+        core.wait(0.005)
+        parallel.setData(0)
         core.wait(2)	
 	
     elif thisTrial['condition'] == 'breakHypno':
@@ -209,10 +217,14 @@ for thisTrial in trials:
 alignHoriz = 'center', alignVert='center', height=0.04, color='white')
         hypno.draw()
         win.flip()
-        parallel.setData(thisTrial['Trigger'])
+        parallel.setData(thisTrial['trigger'])
+        core.wait(0.005)
+        parallel.setData(0)
         fixation.draw()
         win.flip()
         parallel.setData(trigger_fixation)
+        core.wait(0.005)
+        parallel.setData(0)
         core.wait(2)
 		
 	
@@ -220,20 +232,25 @@ alignHoriz = 'center', alignVert='center', height=0.04, color='white')
     elif thisTrial['condition'] == 'probe':
         probe_signe.draw(win)
         win.flip()
-        parallel.setData(thisTrial['Trigger'])
+        parallel.setData(int(thisTrial['trigger']))
+        core.wait(0.005)
+        parallel.setData(0)
         core.wait(0.5)
         probe.draw(win)
         win.flip()
-        parallel.setData(thisTrial['Trigger'])
         thisProbeKey = getKeyboardResponse( ['1', '2', '3', '4'], duration = 0)
-        Trig_probe = whatresp(thisProbeKey)
+        Trig_probe = whatresp(thisProbeKey[0])
         if Trig_probe:
             parallel.setData(Trig_probe)
-            pass
+            core.wait(0.005)
+            parallel.setData(0)
+           
 
         fixation.draw()
         win.flip()
         parallel.setData(trigger_fixation)
+        core.wait(0.005)
+        parallel.setData(0)
         core.wait(2)	
 
     elif thisTrial['condition'] == 'end':
@@ -245,36 +262,44 @@ alignHoriz = 'center', alignVert='center', height=0.04, color='white')
         stim = visual.TextStim(win, text = thisTrial['stim'], height = 0.1)
         stim.draw()
         win.flip()
-        parallel.setData(thisTrial['Trigger'])
+        parallel.setData(int(thisTrial['trigger']))
+        core.wait(0.005)
+        parallel.setData(0)
 
         #thisRespKey = event.waitKeys(maxWait= ISI, keyList = ['space', 'none'])
 		#core.wait(ISI)
         thisRespKey = getKeyboardResponse('space', duration = ISI)
+        Trig_resp = whatresp(thisRespKey[0])
+
+        if Trig_resp:
+            parallel.setData(Trig_resp)
+            core.wait(0.005)
+            parallel.setData(0)
+            pass
 
 	if len(thisRespKey)>0 : # at least one key was pressed
 		RespKey = thisRespKey[0] # get keypress
 		ResponseTime = thisRespKey[1] #get response time
-        Trig_resp = whatresp(RespKey)
-        if Trig_resp:
-            parallel.setData(Trig_resp)
-            pass
+        
 	
 	#--------------------------------------
 	# store trial data
 	#--------------------------------------
 	
-	trials.addData('stimOnset', stimOnset)
+	thisTrial['stim onset'] =  stimOnset
 	if RespKey != []:
-		trials.addData('respKey', RespKey)
-		trials.addData('respTime', ResponseTime)
-	if ProbeKey != []:
-		trials.addData('respKey', ProbeKey)       
-		trials.addData('respTime', ResponseTime) 		
-	thisExp.nextEntry()
+		thisTrial['response'] =  RespKey
+		thisTrial['response time'] =  ResponseTime
+	if thisProbeKey != []:
+		thistrial['response']= thisProbeKey       
+		thistrial['response time'] = ResponseTime 		
+#	thisExp.nextEntry()
 	
 	if event.getKeys(['q', 'escape']):
 		win.close()
 		core.quit()
+    
+    parallel.setData(0) # sets all pin low
 
 totaltime = expeClock.getTime()/60
 print totaltime
