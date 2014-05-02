@@ -14,10 +14,10 @@ GO = 1
 NOGO = 2
 PROBE = 3
 
-Trig_go = 771
-Trig_nogo = 772
-Trig_probe = 773
-Trig_break = 774
+Trig_go = int("10010000",2)
+Trig_nogo = int("01001000",2)
+Trig_probe = int("00100100",2)
+Trig_break = int("00010010",2)
 
 def genSARTList(numStimPerBlock, numBlock):
 	writeTrials = csv.writer(open('mytrialList.csv','wb'), delimiter = ',', quotechar = '"')
