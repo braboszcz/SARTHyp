@@ -1,0 +1,337 @@
+Subject,Session,Group,Type,Total
+s03,hypno,low,Go,533
+s03,hypno,low,NoGo,23
+s03,hypno,low,Missed Go,7
+s03,hypno,low,Miss NoGo,7
+s03,hypno,low,Focus,16
+s03,hypno,low,Related thought,2
+s03,hypno,low,Sensory,1
+s03,hypno,low,MW,11
+s03,norm,low,Go,534
+s03,norm,low,NoGo,18
+s03,norm,low,Missed Go,6
+s03,norm,low,Miss NoGo,12
+s03,norm,low,Focus,16
+s03,norm,low,Related thought,5
+s03,norm,low,Sensory,1
+s03,norm,low,MW,8
+s09,hypno,low,Go,540
+s09,hypno,low,NoGo,28
+s09,hypno,low,Missed Go,0
+s09,hypno,low,Miss NoGo,2
+s09,hypno,low,Focus,28
+s09,hypno,low,Related thought,2
+s09,hypno,low,Sensory,0
+s09,hypno,low,MW,0
+s09,norm,low,Go,540
+s09,norm,low,NoGo,28
+s09,norm,low,Missed Go,0
+s09,norm,low,Miss NoGo,2
+s09,norm,low,Focus,27
+s09,norm,low,Related thought,3
+s09,norm,low,Sensory,0
+s09,norm,low,MW,0
+s14,hypno,low,Go,539
+s14,hypno,low,NoGo,24
+s14,hypno,low,Missed Go,1
+s14,hypno,low,Miss NoGo,6
+s14,hypno,low,Focus,18
+s14,hypno,low,Related thought,0
+s14,hypno,low,Sensory,2
+s14,hypno,low,MW,10
+s14,norm,low,Go,536
+s14,norm,low,NoGo,20
+s14,norm,low,Missed Go,4
+s14,norm,low,Miss NoGo,10
+s14,norm,low,Focus,23
+s14,norm,low,Related thought,0
+s14,norm,low,Sensory,3
+s14,norm,low,MW,4
+s17,hypno,low,Go,538
+s17,hypno,low,NoGo,21
+s17,hypno,low,Missed Go,2
+s17,hypno,low,Miss NoGo,9
+s17,hypno,low,Focus,21
+s17,hypno,low,Related thought,8
+s17,hypno,low,Sensory,1
+s17,hypno,low,MW,0
+s17,norm,low,Go,517
+s17,norm,low,NoGo,5
+s17,norm,low,Missed Go,23
+s17,norm,low,Miss NoGo,25
+s17,norm,low,Focus,15
+s17,norm,low,Related thought,6
+s17,norm,low,Sensory,7
+s17,norm,low,MW,2
+s20,hypno,low,Go,540
+s20,hypno,low,NoGo,29
+s20,hypno,low,Missed Go,0
+s20,hypno,low,Miss NoGo,1
+s20,hypno,low,Focus,10
+s20,hypno,low,Related thought,16
+s20,hypno,low,Sensory,0
+s20,hypno,low,MW,4
+s20,norm,low,Go,539
+s20,norm,low,NoGo,29
+s20,norm,low,Missed Go,1
+s20,norm,low,Miss NoGo,1
+s20,norm,low,Focus,4
+s20,norm,low,Related thought,15
+s20,norm,low,Sensory,2
+s20,norm,low,MW,9
+s26,hypno,low,Go,540
+s26,hypno,low,NoGo,27
+s26,hypno,low,Missed Go,0
+s26,hypno,low,Miss NoGo,3
+s26,hypno,low,Focus,26
+s26,hypno,low,Related thought,2
+s26,hypno,low,Sensory,2
+s26,hypno,low,MW,0
+s26,norm,low,Go,540
+s26,norm,low,NoGo,26
+s26,norm,low,Missed Go,0
+s26,norm,low,Miss NoGo,4
+s26,norm,low,Focus,24
+s26,norm,low,Related thought,1
+s26,norm,low,Sensory,0
+s26,norm,low,MW,5
+s28,hypno,low,Go,539
+s28,hypno,low,NoGo,26
+s28,hypno,low,Missed Go,1
+s28,hypno,low,Miss NoGo,4
+s28,hypno,low,Focus,23
+s28,hypno,low,Related thought,5
+s28,hypno,low,Sensory,2
+s28,hypno,low,MW,0
+s28,norm,low,Go,533
+s28,norm,low,NoGo,19
+s28,norm,low,Missed Go,7
+s28,norm,low,Miss NoGo,11
+s28,norm,low,Focus,14
+s28,norm,low,Related thought,12
+s28,norm,low,Sensory,2
+s28,norm,low,MW,2
+s01,hypno,medium,Go,536
+s01,hypno,medium,NoGo,27
+s01,hypno,medium,Missed Go,4
+s01,hypno,medium,Miss NoGo,2
+s01,hypno,medium,Focus,0
+s01,hypno,medium,Related thought,4
+s01,hypno,medium,Sensory,8
+s01,hypno,medium,MW,18
+s01,norm,medium,Go,536
+s01,norm,medium,NoGo,27
+s01,norm,medium,Missed Go,4
+s01,norm,medium,Miss NoGo,2
+s01,norm,medium,Focus,2
+s01,norm,medium,Related thought,15
+s01,norm,medium,Sensory,4
+s01,norm,medium,MW,9
+s02,hypno,medium,Go,539
+s02,hypno,medium,NoGo,27
+s02,hypno,medium,Missed Go,1
+s02,hypno,medium,Miss NoGo,2
+s02,hypno,medium,Focus,0
+s02,hypno,medium,Related thought,5
+s02,hypno,medium,Sensory,12
+s02,hypno,medium,MW,13
+s02,norm,medium,Go,540
+s02,norm,medium,NoGo,26
+s02,norm,medium,Missed Go,0
+s02,norm,medium,Miss NoGo,4
+s02,norm,medium,Focus,7
+s02,norm,medium,Related thought,10
+s02,norm,medium,Sensory,7
+s02,norm,medium,MW,6
+s10,hypno,medium,Go,530
+s10,hypno,medium,NoGo,12
+s10,hypno,medium,Missed Go,10
+s10,hypno,medium,Miss NoGo,18
+s10,hypno,medium,Focus,4
+s10,hypno,medium,Related thought,8
+s10,hypno,medium,Sensory,2
+s10,hypno,medium,MW,16
+s10,norm,medium,Go,521
+s10,norm,medium,NoGo,14
+s10,norm,medium,Missed Go,14
+s10,norm,medium,Miss NoGo,16
+s10,norm,medium,Focus,2
+s10,norm,medium,Related thought,7
+s10,norm,medium,Sensory,2
+s10,norm,medium,MW,19
+s12,hypno,medium,Go,536
+s12,hypno,medium,NoGo,26
+s12,hypno,medium,Missed Go,4
+s12,hypno,medium,Miss NoGo,4
+s12,hypno,medium,Focus,4
+s12,hypno,medium,Related thought,7
+s12,hypno,medium,Sensory,10
+s12,hypno,medium,MW,9
+s12,norm,medium,Go,531
+s12,norm,medium,NoGo,25
+s12,norm,medium,Missed Go,3
+s12,norm,medium,Miss NoGo,5
+s12,norm,medium,Focus,15
+s12,norm,medium,Related thought,9
+s12,norm,medium,Sensory,3
+s12,norm,medium,MW,3
+s18,hypno,medium,Go,460
+s18,hypno,medium,NoGo,23
+s18,hypno,medium,Missed Go,80
+s18,hypno,medium,Miss NoGo,7
+s18,hypno,medium,Focus,19
+s18,hypno,medium,Related thought,5
+s18,hypno,medium,Sensory,2
+s18,hypno,medium,MW,4
+s18,norm,medium,Go,527
+s18,norm,medium,NoGo,7
+s18,norm,medium,Missed Go,13
+s18,norm,medium,Miss NoGo,23
+s18,norm,medium,Focus,22
+s18,norm,medium,Related thought,1
+s18,norm,medium,Sensory,0
+s18,norm,medium,MW,7
+s19,hypno,medium,Go,537
+s19,hypno,medium,NoGo,23
+s19,hypno,medium,Missed Go,3
+s19,hypno,medium,Miss NoGo,7
+s19,hypno,medium,Focus,0
+s19,hypno,medium,Related thought,6
+s19,hypno,medium,Sensory,0
+s19,hypno,medium,MW,24
+s19,norm,medium,Go,540
+s19,norm,medium,NoGo,25
+s19,norm,medium,Missed Go,0
+s19,norm,medium,Miss NoGo,5
+s19,norm,medium,Focus,4
+s19,norm,medium,Related thought,20
+s19,norm,medium,Sensory,0
+s19,norm,medium,MW,6
+s27,hypno,medium,Go,538
+s27,hypno,medium,NoGo,20
+s27,hypno,medium,Missed Go,2
+s27,hypno,medium,Miss NoGo,10
+s27,hypno,medium,Focus,6
+s27,hypno,medium,Related thought,17
+s27,hypno,medium,Sensory,7
+s27,hypno,medium,MW,0
+s27,norm,medium,Go,537
+s27,norm,medium,NoGo,16
+s27,norm,medium,Missed Go,3
+s27,norm,medium,Miss NoGo,14
+s27,norm,medium,Focus,1
+s27,norm,medium,Related thought,12
+s27,norm,medium,Sensory,17
+s27,norm,medium,MW,0
+s06,hypno,high,Go,524
+s06,hypno,high,NoGo,17
+s06,hypno,high,Missed Go,16
+s06,hypno,high,Miss NoGo,13
+s06,hypno,high,Focus,27
+s06,hypno,high,Related thought,1
+s06,hypno,high,Sensory,2
+s06,hypno,high,MW,0
+s06,norm,high,Go,534
+s06,norm,high,NoGo,21
+s06,norm,high,Missed Go,6
+s06,norm,high,Miss NoGo,9
+s06,norm,high,Focus,17
+s06,norm,high,Related thought,8
+s06,norm,high,Sensory,4
+s06,norm,high,MW,1
+s08,hypno,high,Go,536
+s08,hypno,high,NoGo,15
+s08,hypno,high,Missed Go,4
+s08,hypno,high,Miss NoGo,15
+s08,hypno,high,Focus,11
+s08,hypno,high,Related thought,9
+s08,hypno,high,Sensory,2
+s08,hypno,high,MW,8
+s08,norm,high,Go,536
+s08,norm,high,NoGo,18
+s08,norm,high,Missed Go,4
+s08,norm,high,Miss NoGo,12
+s08,norm,high,Focus,26
+s08,norm,high,Related thought,0
+s08,norm,high,Sensory,0
+s08,norm,high,MW,4
+s11,hypno,high,Go,540
+s11,hypno,high,NoGo,25
+s11,hypno,high,Missed Go,0
+s11,hypno,high,Miss NoGo,5
+s11,hypno,high,Focus,29
+s11,hypno,high,Related thought,0
+s11,hypno,high,Sensory,0
+s11,hypno,high,MW,1
+s11,norm,high,Go,540
+s11,norm,high,NoGo,26
+s11,norm,high,Missed Go,0
+s11,norm,high,Miss NoGo,4
+s11,norm,high,Focus,29
+s11,norm,high,Related thought,1
+s11,norm,high,Sensory,0
+s11,norm,high,MW,0
+s13,hypno,high,Go,538
+s13,hypno,high,NoGo,25
+s13,hypno,high,Missed Go,2
+s13,hypno,high,Miss NoGo,5
+s13,hypno,high,Focus,11
+s13,hypno,high,Related thought,17
+s13,hypno,high,Sensory,2
+s13,hypno,high,MW,0
+s13,norm,high,Go,527
+s13,norm,high,NoGo,24
+s13,norm,high,Missed Go,2
+s13,norm,high,Miss NoGo,6
+s13,norm,high,Focus,7
+s13,norm,high,Related thought,14
+s13,norm,high,Sensory,6
+s13,norm,high,MW,2
+s15,hypno,high,Go,489
+s15,hypno,high,NoGo,22
+s15,hypno,high,Missed Go,51
+s15,hypno,high,Miss NoGo,8
+s15,hypno,high,Focus,26
+s15,hypno,high,Related thought,1
+s15,hypno,high,Sensory,1
+s15,hypno,high,MW,2
+s15,norm,high,Go,527
+s15,norm,high,NoGo,19
+s15,norm,high,Missed Go,13
+s15,norm,high,Miss NoGo,11
+s15,norm,high,Focus,11
+s15,norm,high,Related thought,4
+s15,norm,high,Sensory,0
+s15,norm,high,MW,15
+s23,hypno,high,Go,539
+s23,hypno,high,NoGo,13
+s23,hypno,high,Missed Go,1
+s23,hypno,high,Miss NoGo,17
+s23,hypno,high,Focus,25
+s23,hypno,high,Related thought,1
+s23,hypno,high,Sensory,3
+s23,hypno,high,MW,1
+s23,norm,high,Go,512
+s23,norm,high,NoGo,0
+s23,norm,high,Missed Go,28
+s23,norm,high,Miss NoGo,30
+s23,norm,high,Focus,14
+s23,norm,high,Related thought,11
+s23,norm,high,Sensory,4
+s23,norm,high,MW,1
+s24,hypno,high,Go,478
+s24,hypno,high,NoGo,22
+s24,hypno,high,Missed Go,62
+s24,hypno,high,Miss NoGo,8
+s24,hypno,high,Focus,1
+s24,hypno,high,Related thought,4
+s24,hypno,high,Sensory,1
+s24,hypno,high,MW,24
+s24,norm,high,Go,495
+s24,norm,high,NoGo,19
+s24,norm,high,Missed Go,45
+s24,norm,high,Miss NoGo,11
+s24,norm,high,Focus,1
+s24,norm,high,Related thought,4
+s24,norm,high,Sensory,2
+s24,norm,high,MW,23
