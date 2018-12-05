@@ -1,0 +1,86 @@
+---
+title: "sarthyp_behaviour"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(cowplot)
+library(tidyverse)
+```
+
+## SARTHYP Behaviour Analysis
+ - SART task behaviour
+ - responses to thought probes
+ - we will look at the difference Hypno-Norm for each type of probe /response
+
+
+```{r, echo=FALSE}
+# load data
+data <- read.csv("/media/guakamole/NAS-DATA/SARTHYP Data/Analyse_behavior/all_events_R_dataframe.csv",header=T)
+data$Subject <- factor(data$Subject)
+```
+
+
+
+## 1D scatterplots = stripcharts of differences between Norm and Hypno for each group
+
+```{r, echo=FALSE}
+# compute the Norm - Hypno difference score for each response for each participants
+diff_cond <- data %>%
+  group_by(Subject, Group, Type) %>%
+  summarize(
+    count=n(),
+    diff = (Total[Session=="hypno"] - Total[Session=="norm"])
+  )
+
+# plot scatterplot per group
+
+
+value <- diff_cond$diff
+participant <-diff_cond$Subject[diff_cond$Type=="MW"] 
+resp <- diff_cond$Type[diff_cond$Group=="low"] 
+diff <- data.frame(participant, resp, value)
+
+#get only thought probes
+probes<-subset(diff, ! resp %in% c("Go", "NoGo", "Missed Go", "Miss NoGo" ), drop = TRUE)
+
+set.seed(8)
+diffstrip <- ggplot(probes, aes(x=resp, y=value, fill=resp, colour=resp, shape=resp)) +
+  geom_abline(intercept = 0, slope = 0) +
+  geom_jitter(position=position_jitter(0.4), size=2, stroke=0.5) +
+  
+  labs(title="Differences: Hypnosis - Normal") 
+diffstrip
+```
+## There is not much difference between normal and hypnosis 
+
+
+
+```{r, echo=FALSE}
+#get only behaviour
+behav<-subset(diff, ! resp %in% c("Focus", "MW", "Sensory", "Related Thought" ), drop = TRUE)
+
+set.seed(8)
+diffstrip <- ggplot(behav, aes(x=resp, y=value, fill=resp, colour=resp, shape=resp)) +
+  geom_abline(intercept = 0, slope = 0) +
+  geom_jitter(position=position_jitter(0.4), size=2, stroke=0.5) +
+  
+  labs(title="Differences: Hypnosis - Normal") 
+diffstrip
+
+
+```
+
+## There is not much difference between normal and hypnosis...
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
